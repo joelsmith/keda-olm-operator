@@ -17,13 +17,13 @@ spec:
       containers:
         - name: keda-olm-operator
           image: ghcr.io/kedacore/keda-olm-operator:main
-          command:
-            - /manager
           args:
             - --leader-elect
             - --zap-log-level=info
             - --zap-encoder=console
             - --zap-time-encoding=rfc3339
+          command:
+            - /manager
           imagePullPolicy: Always
           resources:
             requests:
@@ -47,5 +47,11 @@ spec:
               port: 8081
             initialDelaySeconds: 20
           env:
+            - name: KEDA_OPERATOR_IMAGE
+              value: quay.io/joelsmith/keda:2.10.1
+            - name: KEDA_METRICS_SERVER_IMAGE
+              value: quay.io/joelsmith/keda-metrics-apiserver:2.10.1
+            - name: KEDA_ADMISSION_WEBHOOKS_IMAGE
+              value: quay.io/joelsmith/keda-admission-webhooks:2.10.1
             - name: WATCH_NAMESPACE
               value: keda

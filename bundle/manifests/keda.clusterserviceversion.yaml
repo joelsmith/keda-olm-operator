@@ -593,6 +593,12 @@ spec:
                 command:
                 - /manager
                 env:
+                - name: KEDA_OPERATOR_IMAGE
+                  value: quay.io/joelsmith/keda:2.10.1
+                - name: KEDA_METRICS_SERVER_IMAGE
+                  value: quay.io/joelsmith/keda-metrics-apiserver:2.10.1
+                - name: KEDA_ADMISSION_WEBHOOKS_IMAGE
+                  value: quay.io/joelsmith/keda-admission-webhooks:2.10.1
                 - name: WATCH_NAMESPACE
                   valueFrom:
                     fieldRef:
